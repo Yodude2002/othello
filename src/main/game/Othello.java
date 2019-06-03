@@ -36,13 +36,31 @@ public class Othello {
             }catch (Exception e) {
                 return 1;
             }
+
+            if(p1Turn != -1) {
+                // TODO: 2019-06-03 verify the move
+
+                board.makeMove(p1Turn,true);
+
+            }else {
+                // TODO: 2019-06-03 verify the inability to move
+            }
+
             try{
                 p2Turn = player2.onTurn(board.getCurrentBoard());
             }catch (Exception e) {
                 return 0;
             }
 
-            // TODO: 2019-05-31 process the moves, and see if anyone has won.
+            if(p2Turn != -1) {
+                // TODO: 2019-06-03 verify the move
+
+                board.makeMove(p2Turn, false);
+
+            }else {
+                // TODO: 2019-06-03 verify the inability to move
+                if(p1Turn == -1) running = false;
+            }
 
         }
 
