@@ -8,6 +8,18 @@ import java.util.List;
 
 public class RandomAI implements Player {
 
+    private boolean isWhite;
+
+    @Override
+    public boolean getColor(){
+        return isWhite;
+    }
+
+    @Override
+    public void setColor(boolean white){
+        isWhite = white;
+    }
+
     @Override
     public int onTurn(BoardState boardState) {
 

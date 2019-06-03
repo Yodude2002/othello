@@ -29,7 +29,7 @@ public class BoardState {
      *
      * If a tile is empty, its state is not guaranteed.
      *
-     * @return a {@code boolean[][]} representing the color of the tiles.
+     * @return a {@code boolean[][]} representing the colors of the tiles.
      */
     public boolean[][] getColor() {
         return color;
