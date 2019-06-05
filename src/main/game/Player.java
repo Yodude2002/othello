@@ -38,14 +38,14 @@ public interface Player {
                     for (int direction = 0; direction < 8; direction++) {
                         int rowInc = 0;
                         int colInc = 0;
-                        if("701".contains(Integer.toString(direction))){
+                        if(direction == 7 || direction == 0 || direction == 1){
                             rowInc = 1;
-                        }else if("345".contains(Integer.toString(direction))){
+                        }else if(direction == 3 || direction == 4 || direction == 5){
                             rowInc = -1;
                         }
-                        if("123".contains(Integer.toString(direction))){
+                        if(direction == 1 || direction == 2 || direction == 3){
                             colInc = 1;
-                        }else if("567".contains(Integer.toString(direction))){
+                        }else if(direction == 5 || direction == 6 || direction == 7){
                             colInc = -1;
                         }
                         int row = r + rowInc;
