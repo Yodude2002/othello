@@ -15,9 +15,10 @@ public interface Player {
      * If the invocation of his method throws an Exception, then that Player loses the game.
      *
      * @param boardState the current state of the board
-     * @return an integer in the range [0,64), or -1 to indicate that no legal moves can be made
+     * @return an integer in the range [0,64), or -1 to indicate that no legal moves can be made.
+     *         This move must be a valid move.
      */
-    int onTurn(BoardState boardState);
+    int getMove(BoardState boardState);
 
     /**
      * Finds all of the possible moves for a player with a given board, and a specified color to be playing as
