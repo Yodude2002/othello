@@ -14,6 +14,7 @@ public class Board {
     }
 
     /**
+     * Does nothing if move is invalid.
      * Performs a Move on the given tile.
      * Changes tile[r][c] to color in boolean.
      * Then flips surrounding tiles based on Othello rules.
@@ -32,6 +33,7 @@ public class Board {
     }
 
     /**
+     * PRECONDITION - Move (r,c) must be valid
      * Goes out in each direction from (r,c). TODO updateBoard is unfished as it updates oppsoite color tiles even when they do not form a sandwhich.
      * I will fix mistake soon.
      * Flips a disk if it is not equal to color.

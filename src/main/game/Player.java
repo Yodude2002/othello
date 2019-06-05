@@ -32,8 +32,8 @@ public interface Player {
 
         boolean[][] board = boardState.getColor(); //An array of booleans where white is true and black is false
 
-        for (int r = 0; r < 8; r++) {
-            for (int c = 0; c < 8; c++) {
+        for (int r = 0; r < board.length; r++) {
+            for (int c = 0; c < board[0].length; c++) {
                 if(!boardState.getHasTile()[r][c]) {
                     for (int direction = 0; direction < 8; direction++) {
                         int rowInc = 0;
@@ -50,11 +50,11 @@ public interface Player {
                         }
                         int row = r + rowInc;
                         int col = c + colInc;
-                        while(row<8 && row>-1 && col<8 && col>-1 && boardState.getHasTile()[row][col] && color != board[row][col]){
+                        while(row<board.length && row>-1 && col<board[0].length && col>-1 && boardState.getHasTile()[row][col] && color != board[row][col]){
                             row += rowInc;
                             col += colInc;
                         }
-                        if((row<8 && row>-1 && col<8 && col>-1)&&(row != r + rowInc || col != c + colInc)&& color == board[row][col]){
+                        if((row<board.length && row>-1 && col<board[0].length && col>-1)&&(row != r + rowInc || col != c + colInc)&& color == board[row][col]){
                             possibleMoves.add(r*8 + c);
                             break;
                         }
@@ -64,5 +64,22 @@ public interface Player {
         }
 
         return possibleMoves;
+    }
+
+    /**
+     * Given a potentialMove [-1, 63], return if move is valid
+     * @param boardState Board with a grid
+     * @param color Color of player checking if move is valid
+     * @param potentialMove Move for player from [-1,63].
+     * @return True if valid move for color of player, false if invalid
+     */
+    static boolean validMove(BoardState boardState, boolean color, int potentialMove) {
+        if (potentialMove < 0 || potentialMove > Math.square(boardState.getColor().length)-1)
+            return false;
+        List<Integer> posMoves = findPossibleMovess(boardState, color);
+        for (int move : posMoves)
+            if (potentialMove == move)
+                return true;
+        return false;
     }
 }
