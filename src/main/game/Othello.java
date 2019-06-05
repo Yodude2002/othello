@@ -18,7 +18,6 @@ public class Othello {
         player1 = p1;
         player2 = p2;
 
-
     }
 
     /**
