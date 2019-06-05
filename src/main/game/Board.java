@@ -18,12 +18,12 @@ public class Board {
      * Performs a Move on the given tile.
      * Changes tile[r][c] to color in boolean.
      * Then flips surrounding tiles based on Othello rules.
-     * @param position the position of the move that was played
-     * @param color the color of the disk now at the position
+     * @param position The position of the move that was played
+     * @param color The color of the disk now at the position
      */
     public void makeMove(int position, boolean color) {
         if(position < -1 || position > 63) throw new IllegalArgumentException("position must be in the range [-1,63]");
-        if(position == -1) return;
+        if(position == -1 || !Player.validMove(currentBoard,color,position)) return;
 
         int row = position/8,col = position%8;
 
@@ -31,6 +31,7 @@ public class Board {
         currentBoard.getColor()[row][col] = color;
         //updateBoard(row,col);
     }
+
 
     /**
      * PRECONDITION - Move (r,c) must be valid
