@@ -10,7 +10,7 @@ public class BoardState {
      * @param color a 2d array representing the color of the disks of the tiles.
      */
     public BoardState(boolean[][] hasDisk, boolean[][] color) {
-        this.hasDisk = hasTile.clone();
+        this.hasDisk = hasDisk.clone();
         this.color = color.clone();
     }
 

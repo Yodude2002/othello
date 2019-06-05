@@ -18,7 +18,6 @@ public class Othello {
         player1 = p1;
         player2 = p2;
 
-
     }
 
     /**
@@ -32,7 +31,7 @@ public class Othello {
         while (running) {
             int p1Turn, p2Turn;
             try{
-                p1Turn = player1.onTurn(board.getCurrentBoard());
+                p1Turn = player1.getMove(board.getCurrentBoard());
             }catch (Exception e) {
                 return 1;
             }
@@ -47,7 +46,7 @@ public class Othello {
             }
 
             try{
-                p2Turn = player2.onTurn(board.getCurrentBoard());
+                p2Turn = player2.getMove(board.getCurrentBoard());
             }catch (Exception e) {
                 return 0;
             }

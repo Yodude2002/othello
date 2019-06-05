@@ -15,9 +15,10 @@ public interface Player {
      * If the invocation of his method throws an Exception, then that Player loses the game.
      *
      * @param boardState the current state of the board
-     * @return an integer in the range [0,64), or -1 to indicate that no legal moves can be made
+     * @return an integer in the range [0,64), or -1 to indicate that no legal moves can be made.
+     *         This move must be a valid move.
      */
-    int onTurn(BoardState boardState);
+    int getMove(BoardState boardState);
 
     /**
      * Finds all of the possible moves for a player with a given board, and a specified color to be playing as
@@ -38,14 +39,14 @@ public interface Player {
                     for (int direction = 0; direction < 8; direction++) {
                         int rowInc = 0;
                         int colInc = 0;
-                        if("701".contains(Integer.toString(direction))){
+                        if(direction == 7 || direction == 0 || direction == 1){
                             rowInc = 1;
-                        }else if("345".contains(Integer.toString(direction))){
+                        }else if(direction == 3 || direction == 4 || direction == 5){
                             rowInc = -1;
                         }
-                        if("123".contains(Integer.toString(direction))){
+                        if(direction == 1 || direction == 2 || direction == 3){
                             colInc = 1;
-                        }else if("567".contains(Integer.toString(direction))){
+                        }else if(direction == 5 || direction == 6 || direction == 7){
                             colInc = -1;
                         }
                         int row = r + rowInc;
