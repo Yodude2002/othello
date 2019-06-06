@@ -39,7 +39,7 @@ public class Board {
 
         currentBoard.getHasTile()[row][col] = true;
         currentBoard.getColor()[row][col] = color;
-        //updateBoard(row,col);
+        updateBoard(row,col,color);
     }
 
 
@@ -53,7 +53,7 @@ public class Board {
      * @param c Col of tile
      * @param color The color tile (r,c) now is.
      */
-    private void updateBoard(byte r, byte c, boolean color) {
+    private void updateBoard(int r, int c, boolean color) {
         flipUp(r,c,color);
         flipUpRight(r,c,color);
         flipRight(r,c,color);
@@ -72,8 +72,8 @@ public class Board {
      * @param c
      * @param color
      */
-    private void flipUp(byte r, byte c, boolean color) {
-        byte row = (byte) (r-1);
+    private void flipUp(int r, int c, boolean color) {
+        int row = r-1;
         while (currentBoard.getColor()[row][c] == color) {
             if (row < 0 || !currentBoard.getHasTile()[row][c])
                 return;
@@ -83,9 +83,9 @@ public class Board {
             currentBoard.getColor()[row][c] = color;
     }
 
-    private void flipUpRight(byte r, byte c, boolean color) {
-        byte row = (byte) (r-1);
-        byte col = (byte) (c+1);
+    private void flipUpRight(int r, int c, boolean color) {
+        int row = r-1;
+        int col = c+1;
         while (currentBoard.getColor()[row][col] == color) {
             if (row < 0 || col >= currentBoard.getColor()[row].length || !currentBoard.getHasTile()[row][col])
                 return;
@@ -96,8 +96,8 @@ public class Board {
             currentBoard.getColor()[row][col] = color;
     }
 
-    private void flipRight(byte r, byte c, boolean color) {
-        byte col = (byte) (c+1);
+    private void flipRight(int r, int c, boolean color) {
+        int col = c+1;
         while (currentBoard.getColor()[r][col] == color) {
             if (col >= currentBoard.getColor()[r].length || !currentBoard.getHasTile()[r][col])
                 return;
@@ -107,9 +107,9 @@ public class Board {
             currentBoard.getColor()[r][col] = color;
     }
 
-    private void flipDownRight(byte r, byte c, boolean color) {
-        byte row = (byte) (r+1);
-        byte col = (byte) (c+1);
+    private void flipDownRight(int r, int c, boolean color) {
+        int row = r+1;
+        int col = c+1;
         while (currentBoard.getColor()[row][col] == color) {
             if (row >= currentBoard.getColor().length || col >= currentBoard.getColor()[row].length || !currentBoard.getHasTile()[row][col])
                 return;
@@ -120,8 +120,8 @@ public class Board {
             currentBoard.getColor()[row][col] = color;
     }
 
-    private void flipDown(byte r, byte c, boolean color) {
-        byte row = (byte) (r+1);
+    private void flipDown(int r, int c, boolean color) {
+        int row =  r+1;
         while (currentBoard.getColor()[row][c] == color) {
             if (row >= currentBoard.getColor().length || !currentBoard.getHasTile()[row][c])
                 return;
@@ -131,9 +131,9 @@ public class Board {
             currentBoard.getColor()[row][c] = color;
     }
 
-    private void flipDownLeft(byte r, byte c, boolean color) {
-        byte row = (byte) (r+1);
-        byte col = (byte) (c-1);
+    private void flipDownLeft(int r, int c, boolean color) {
+        int row = r+1;
+        int col = c-1;
         while (currentBoard.getColor()[row][col] == color) {
             if (row >= currentBoard.getColor().length || col < 0 || !currentBoard.getHasTile()[row][col])
                 return;
@@ -144,8 +144,8 @@ public class Board {
             currentBoard.getColor()[row][col] = color;
     }
 
-    private void flipLeft(byte r, byte c, boolean color) {
-        byte col = (byte) (c-1);
+    private void flipLeft(int r, int c, boolean color) {
+        int col = c-1;
         while (currentBoard.getColor()[r][col] == color) {
             if (col < 0 || !currentBoard.getHasTile()[r][col])
                 return;
@@ -155,9 +155,9 @@ public class Board {
             currentBoard.getColor()[r][col] = color;
     }
 
-    private void flipUpLeft(byte r, byte c, boolean color) {
-        byte row = (byte) (r-1);
-        byte col = (byte) (c-1);
+    private void flipUpLeft(int r, int c, boolean color) {
+        int row = r-1;
+        int col = c-1;
         while (currentBoard.getColor()[row][col] == color) {
             if (row < 0 || col < 0 || !currentBoard.getHasTile()[row][col])
                 return;
