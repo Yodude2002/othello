@@ -19,6 +19,11 @@ public class RandomAI implements Player {
     }
 
     @Override
+    public String getName() {
+        return "Random AI";
+    }
+
+    @Override
     public int getMove(BoardState boardState) {
         List<Integer> possibleMoves = Player.findPossibleMoves(boardState,isWhite);
         if(possibleMoves.size() == 0) return -1;
