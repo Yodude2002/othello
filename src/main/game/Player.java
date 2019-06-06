@@ -75,9 +75,9 @@ public interface Player {
      * @return True if valid move for color of player, false if invalid
      */
     static boolean validMove(BoardState boardState, boolean color, int potentialMove) {
-        if (potentialMove < 0 || potentialMove > Math.square(boardState.getColor().length)-1)
+        if (potentialMove < 0 || potentialMove > 63)
             return false;
-        List<Integer> posMoves = findPossibleMovess(boardState, color);
+        List<Integer> posMoves = findPossibleMoves(boardState, color);
         for (int move : posMoves)
             if (potentialMove == move)
                 return true;
