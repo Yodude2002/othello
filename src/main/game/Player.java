@@ -10,6 +10,12 @@ public interface Player {
     void setColor(boolean white);
 
     /**
+     * Gets the name of this AI
+     * @return the name of the AI
+     */
+    String getName();
+
+    /**
      * Performs a Turn
      *
      * If the invocation of his method throws an Exception, then that Player loses the game.
