@@ -14,6 +14,16 @@ public class Board {
     }
 
     /**
+     * Constructs a new Board with a clone of the given BoardState.
+     *
+     * This method creates deep clones.
+     * @param state
+     */
+    public Board(BoardState state) {
+        currentBoard = new BoardState(state.getHasTile().clone(), state.getColor().clone());
+    }
+
+    /**
      * Performs a Move on the given tile.
      * Changes tile[r][c] to color in boolean.
      * Then flips surrounding tiles based on Othello rules.
