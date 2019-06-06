@@ -24,4 +24,5 @@ public class RandomAI implements Player {
         if(possibleMoves.size() == 0) return -1;
         return possibleMoves.get((int) (Math.random()*possibleMoves.size()));
     }
+
 }
