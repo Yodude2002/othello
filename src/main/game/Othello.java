@@ -19,6 +19,7 @@ public class Othello {
         player2 = p2;
         p1.setColor(false);
         p2.setColor(true);
+        board = new Board();
     }
 
     /**
