@@ -17,7 +17,8 @@ public class Othello {
     public Othello(Player p1, Player p2) {
         player1 = p1;
         player2 = p2;
-
+        p1.setColor(false);
+        p2.setColor(true);
     }
 
     /**
@@ -37,12 +38,7 @@ public class Othello {
             }
 
             if(p1Turn != -1) {
-                // TODO: 2019-06-03 verify the move
-
                 board.makeMove(p1Turn,true);
-
-            }else {
-                // TODO: 2019-06-03 verify the inability to move
             }
 
             try{
@@ -52,17 +48,29 @@ public class Othello {
             }
 
             if(p2Turn != -1) {
-                // TODO: 2019-06-03 verify the move
-
                 board.makeMove(p2Turn, false);
-
             }else {
-                // TODO: 2019-06-03 verify the inability to move
                 if(p1Turn == -1) running = false;
             }
 
         }
 
         return -2;
+    }
+
+    private void logBoard() {
+        boolean[][] hasTile = board.getCurrentBoard().getHasTile(), color = board.getCurrentBoard().getColor();
+
+        for (int r = 0; r < hasTile.length; r++) {
+            for (int c = 0; c < hasTile[0].length; c++) {
+                if(hasTile[r][c]) {
+                    (color[r][c]?System.out:System.err).print('\u0001');
+                }else {
+                    System.out.print(' ');
+                }
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
     }
 }
