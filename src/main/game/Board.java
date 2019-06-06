@@ -24,15 +24,16 @@ public class Board {
     }
 
     /**
+     * Does nothing if move is invalid.
      * Performs a Move on the given tile.
      * Changes tile[r][c] to color in boolean.
      * Then flips surrounding tiles based on Othello rules.
-     * @param position the position of the move that was played
-     * @param color the color of the disk now at the position
+     * @param position The position of the move that was played
+     * @param color The color of the disk now at the position
      */
     public void makeMove(int position, boolean color) {
         if(position < -1 || position > 63) throw new IllegalArgumentException("position must be in the range [-1,63]");
-        if(position == -1) return;
+        if(position == -1 || !Player.validMove(currentBoard,color,position)) return;
 
         int row = position/8,col = position%8;
 
@@ -41,7 +42,9 @@ public class Board {
         //updateBoard(row,col);
     }
 
+
     /**
+     * PRECONDITION - Move (r,c) must be valid
      * Goes out in each direction from (r,c). TODO updateBoard is unfished as it updates oppsoite color tiles even when they do not form a sandwhich.
      * I will fix mistake soon.
      * Flips a disk if it is not equal to color.
