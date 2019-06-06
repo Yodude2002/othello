@@ -53,7 +53,7 @@ public class Board {
      * @param c Col of tile
      * @param color The color tile (r,c) now is.
      */
-    private void updateBoard(int r, int c, boolean color) {
+    private void updateBoard(byte r, byte c, boolean color) {
         flipUp(r,c,color);
         flipUpRight(r,c,color);
         flipRight(r,c,color);
@@ -75,7 +75,7 @@ public class Board {
      * @return True if a direction should no longer be updated, false if continue updating tiles.
      */
     private boolean shouldStopUpdatingDirection(byte r, byte c, boolean color) {
-        return !currentBoard.gethasTile()[r][c] || currentboard.getColor()[r][c] == color;
+        return ((!currentBoard.getHasTile()[r][c]) || (currentBoard.getColor()[r][c] == color));
     }
 
     /**
