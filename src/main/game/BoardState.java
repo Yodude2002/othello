@@ -45,8 +45,6 @@ public class BoardState {
         hasDisk[r2][c1] = true;
         hasDisk[r2][c2] = true;
         color[r1][c1] = true;
-        color[r1][c2] = true;
-        color[r2][c1] = true;
         color[r2][c2] = true;
     }
 
