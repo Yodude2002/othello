@@ -35,4 +35,19 @@ public class BoardState {
         return color;
     }
 
+    public void defaultSetup() {
+        int r1 = color.length/2-1;
+        int c1 = r1;
+        int r2 = r1+1;
+        int c2 = c1+1;
+        hasDisk[r1][c1] = true;
+        hasDisk[r1][c2] = true;
+        hasDisk[r2][c1] = true;
+        hasDisk[r2][c2] = true;
+        color[r1][c1] = true;
+        color[r1][c2] = true;
+        color[r2][c1] = true;
+        color[r2][c2] = true;
+    }
+
 }

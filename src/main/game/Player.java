@@ -35,14 +35,14 @@ public interface Player {
      */
     static List<Integer> findPossibleMoves(BoardState boardState, boolean color){
 
-        List<Integer> possibleMoves = new ArrayList<>(); //TODO this doesn't work
+        List<Integer> possibleMoves = new ArrayList<>();
 
         boolean[][] board = boardState.getColor(); //An array of booleans where white is true and black is false
 
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if(!boardState.getHasTile()[r][c]) {
-                    for (int direction = 0; direction < 8; direction++) {
+                    for (int direction = 0; direction < board.length; direction++) {
                         int rowInc = 0;
                         int colInc = 0;
                         if(direction == 7 || direction == 0 || direction == 1){
@@ -57,7 +57,7 @@ public interface Player {
                         }
                         int row = r + rowInc;
                         int col = c + colInc;
-                        while(row<board.length && row>-1 && col<board[0].length && col>-1 && boardState.getHasTile()[row][col] && color != board[row][col]){
+                        while(row<board.length && row>-1 && col<board[0].length && col>-1 && boardState.getHasTile()[row][col] && color == board[row][col]){
                             row += rowInc;
                             col += colInc;
                         }

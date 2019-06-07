@@ -11,6 +11,7 @@ public class Board {
      */
     public Board() {
         currentBoard = new BoardState(new boolean[8][8],new boolean[8][8]);
+        currentBoard.defaultSetup();
     }
 
     /**

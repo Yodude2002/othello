@@ -17,6 +17,7 @@ public class Othello {
     public Othello(Player p1, Player p2) {
         player1 = p1;
         player2 = p2;
+        board = new Board();
         p1.setColor(false);
         p2.setColor(true);
         board = new Board();
@@ -24,7 +25,7 @@ public class Othello {
 
     /**
      * Runs the game. Returns an integer representing the winner.
-     * @return 0 if p1 won, 1 if p2 won, or -1 if the game was a draw.
+     * @return 0 if p1 won, 1 if p2 won, or -2 if the game was a draw.
      */
     public int run() {
 
@@ -53,7 +54,7 @@ public class Othello {
             }else {
                 if(p1Turn == -1) running = false;
             }
-
+            //logBoard();
         }
 
         return -2;
