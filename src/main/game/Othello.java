@@ -39,7 +39,7 @@ public class Othello {
             }
 
             if(p1Turn != -1) {
-                board.makeMove(p1Turn,true);
+                board.makeMove(p1Turn,player1.getColor());
             }
 
             try{
@@ -49,7 +49,7 @@ public class Othello {
             }
 
             if(p2Turn != -1) {
-                board.makeMove(p2Turn, false);
+                board.makeMove(p2Turn, player1.getColor());
             }else {
                 if(p1Turn == -1) running = false;
             }

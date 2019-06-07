@@ -30,7 +30,7 @@ public class Board {
      * Changes tile[r][c] to color in boolean.
      * Then flips surrounding tiles based on Othello rules.
      * @param position The position of the move that was played
-     * @param color The color of the disk now at the position
+     * @param color The color of the player
      */
     public void makeMove(int position, boolean color) {
         if(position < -1 || position > 63) throw new IllegalArgumentException("position must be in the range [-1,63]");
@@ -75,7 +75,7 @@ public class Board {
      */
     private void flipUp(int r, int c, boolean color) {
         int row = r-1;
-        while (currentBoard.getColor()[row][c] == color) {
+        while (currentBoard.getColor()[row][c] != color) {
             if (row < 0 || !currentBoard.getHasTile()[row][c])
                 return;
             row--;
@@ -87,7 +87,7 @@ public class Board {
     private void flipUpRight(int r, int c, boolean color) {
         int row = r-1;
         int col = c+1;
-        while (currentBoard.getColor()[row][col] == color) {
+        while (currentBoard.getColor()[row][col] != color) {
             if (row < 0 || col >= currentBoard.getColor()[row].length || !currentBoard.getHasTile()[row][col])
                 return;
             row--;
@@ -99,7 +99,7 @@ public class Board {
 
     private void flipRight(int r, int c, boolean color) {
         int col = c+1;
-        while (currentBoard.getColor()[r][col] == color) {
+        while (currentBoard.getColor()[r][col] != color) {
             if (col >= currentBoard.getColor()[r].length || !currentBoard.getHasTile()[r][col])
                 return;
             col++;
@@ -111,7 +111,7 @@ public class Board {
     private void flipDownRight(int r, int c, boolean color) {
         int row = r+1;
         int col = c+1;
-        while (currentBoard.getColor()[row][col] == color) {
+        while (currentBoard.getColor()[row][col] != color) {
             if (row >= currentBoard.getColor().length || col >= currentBoard.getColor()[row].length || !currentBoard.getHasTile()[row][col])
                 return;
             row++;
@@ -123,7 +123,7 @@ public class Board {
 
     private void flipDown(int r, int c, boolean color) {
         int row =  r+1;
-        while (currentBoard.getColor()[row][c] == color) {
+        while (currentBoard.getColor()[row][c] != color) {
             if (row >= currentBoard.getColor().length || !currentBoard.getHasTile()[row][c])
                 return;
             row++;
@@ -135,7 +135,7 @@ public class Board {
     private void flipDownLeft(int r, int c, boolean color) {
         int row = r+1;
         int col = c-1;
-        while (currentBoard.getColor()[row][col] == color) {
+        while (currentBoard.getColor()[row][col] != color) {
             if (row >= currentBoard.getColor().length || col < 0 || !currentBoard.getHasTile()[row][col])
                 return;
             row++;
@@ -147,7 +147,7 @@ public class Board {
 
     private void flipLeft(int r, int c, boolean color) {
         int col = c-1;
-        while (currentBoard.getColor()[r][col] == color) {
+        while (currentBoard.getColor()[r][col] != color) {
             if (col < 0 || !currentBoard.getHasTile()[r][col])
                 return;
             col--;
@@ -159,7 +159,7 @@ public class Board {
     private void flipUpLeft(int r, int c, boolean color) {
         int row = r-1;
         int col = c-1;
-        while (currentBoard.getColor()[row][col] == color) {
+        while (currentBoard.getColor()[row][col] != color) {
             if (row < 0 || col < 0 || !currentBoard.getHasTile()[row][col])
                 return;
             row--;
