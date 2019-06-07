@@ -35,7 +35,15 @@ public class BoardState {
         return color;
     }
 
+    /**
+     * Removes all disks from a board before creating default Othello boardState:
+     * 3,3: White 3,4: Black
+     * 4,3: Black 4,4: White
+     */
     public void defaultSetup() {
+        for (int r = 0; r < hasDisk.length; r++)
+            for (int c = 0; c < hasDisk[r].length ;c++)
+                hasDisk[r][c] = false;
         int r1 = color.length/2-1;
         int c1 = r1;
         int r2 = r1+1;
@@ -45,8 +53,8 @@ public class BoardState {
         hasDisk[r2][c1] = true;
         hasDisk[r2][c2] = true;
         color[r1][c1] = true;
-        color[r1][c2] = true;
-        color[r2][c1] = true;
+        color[r1][c2] = false;
+        color[r2][c1] = false;
         color[r2][c2] = true;
     }
 

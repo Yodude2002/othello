@@ -5,7 +5,7 @@ public class Board {
     private BoardState currentBoard;
 
     /**
-     * Constructs a new default board based on Othello Rules
+     * Constructs a new default board (8 by 8) based on Othello Rules
      * 3,3: White 3,4: Black
      * 4,3: Black 4,4: White
      */
@@ -46,7 +46,7 @@ public class Board {
 
     /**
      * PRECONDITION - Move (r,c) must be valid
-     * Goes out in each direction from (r,c). TODO updateBoard is unfished as it updates oppsoite color tiles even when they do not form a sandwhich.
+     * Goes out in each direction from (r,c).
      * I will fix mistake soon.
      * Flips a disk if it is not equal to color.
      * Stops when it gets to a tile that is color or when it reaches a tile that has no disk.

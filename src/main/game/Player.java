@@ -57,11 +57,11 @@ public interface Player {
                         }
                         int row = r + rowInc;
                         int col = c + colInc;
-                        while(row<board.length && row>-1 && col<board[0].length && col>-1 && boardState.getHasTile()[row][col] && color == board[row][col]){
+                        while(row<board.length && row>-1 && col<board[0].length && col>-1 && boardState.getHasTile()[row][col] && color != board[row][col]){
                             row += rowInc;
                             col += colInc;
                         }
-                        if((row<board.length && row>-1 && col<board[0].length && col>-1)&&(row != r + rowInc || col != c + colInc)&& color == board[row][col]){
+                        if((row<board.length && row>-1 && col<board[0].length && col>-1) && boardState.getHasTile()[row][col] &&(row != r + rowInc || col != c + colInc) && color == board[row][col]){
                             possibleMoves.add(r*8 + c);
                             break;
                         }
