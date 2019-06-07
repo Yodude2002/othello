@@ -35,7 +35,7 @@ public interface Player {
      */
     static List<Integer> findPossibleMoves(BoardState boardState, boolean color){
 
-        List<Integer> possibleMoves = new ArrayList<>();
+        List<Integer> possibleMoves = new ArrayList<>(); //TODO this doesn't work
 
         boolean[][] board = boardState.getColor(); //An array of booleans where white is true and black is false
 
