@@ -24,9 +24,13 @@ public class Othello {
 
     /**
      * Runs the game. Returns an integer representing the winner.
+     * @param clearBoard Clears board before game if true.
      * @return 0 if p1 won, 1 if p2 won, or -2 if the game was a draw.
      */
-    public int run() {
+    public int run(boolean clearBoard) {
+
+        if (clearBoard)
+            board.reset();
 
         boolean running = true;
 
@@ -49,14 +53,19 @@ public class Othello {
             }
 
             if(p2Turn != -1) {
-                board.makeMove(p2Turn, player1.getColor());
+                board.makeMove(p2Turn, player2.getColor());
             }else {
                 if(p1Turn == -1) running = false;
             }
             //logBoard();
         }
-
-        return -2;
+        byte[] ratio = board.blackToWhiteRatio();
+        if (ratio[0] == ratio[1])
+            return -2;
+        boolean winner = ratio[1] > ratio[0];
+        if (winner == player1.getColor())
+            return 0;
+        return 1;
     }
 
     private void logBoard() {
