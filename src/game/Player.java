@@ -13,7 +13,7 @@ public interface Player {
      * Gets the name of this AI
      * @return the name of the AI
      */
-    String getName();
+    String toString();
 
     /**
      * Performs a Turn

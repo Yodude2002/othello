@@ -58,7 +58,7 @@ public class Othello {
                 if(p1Turn == -1) running = false;
             }
         }
-        doThing();
+        //logBoard();
         byte[] ratio = board.blackToWhiteRatio();
         if (ratio[0] == ratio[1])
             return -2;
@@ -68,21 +68,17 @@ public class Othello {
         return 1;
     }
 
-    private void doThing() {
-        logBoard();
-        int i =5;
-    }
     private void logBoard() {
         boolean[][] hasTile = board.getCurrentBoard().getHasTile(), color = board.getCurrentBoard().getColor();
-
+        String space = "  ";
         for (int r = 0; r < hasTile.length; r++) {
             for (int c = 0; c < hasTile[0].length; c++) {
                 if(hasTile[r][c]) {
-                    (color[r][c]?System.out:System.err).print('\u0001');
+                    System.out.print(color[r][c]?'\u0001' : 'B');
                 }else {
-                    System.out.print(' ');
+                    System.out.print(space);
                 }
-                System.out.print(' ');
+                System.out.print(space);
             }
             System.out.println();
         }
