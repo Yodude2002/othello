@@ -42,7 +42,7 @@ public interface Player {
         for (int r = 0; r < board.length; r++) {
             for (int c = 0; c < board[0].length; c++) {
                 if(!boardState.getHasTile()[r][c]) {
-                    for (int direction = 0; direction < board.length; direction++) {
+                    for (int direction = 0; direction < 8; direction++) {
                         int rowInc = 0;
                         int colInc = 0;
                         if(direction == 7 || direction == 0 || direction == 1){

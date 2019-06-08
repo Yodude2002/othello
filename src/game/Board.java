@@ -57,7 +57,7 @@ public class Board {
     private void updateBoard(int row, int col, boolean color) {
         boolean[][] board = currentBoard.getColor();
         boolean[][] hasTile = currentBoard.getHasTile();
-        for (int direction = 0; direction < board.length; direction++) {
+        for (int direction = 0; direction < 8; direction++) {
             int rowInc = 0;
             int colInc = 0;
             int count = 0;
