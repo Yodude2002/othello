@@ -71,8 +71,8 @@ public class Board {
             } else if (direction == 5 || direction == 6 || direction == 7) {
                 colInc = -1;
             }
-            int r = row += rowInc;
-            int c = col += colInc;
+            int r = row + rowInc;
+            int c = col + colInc;
             while (0 <= r && r < board.length && 0 <= c && c < board[r].length &&
                board[r][c] != color) {
                 if (!hasTile[row][c])
@@ -84,7 +84,7 @@ public class Board {
             r -= rowInc;
             c -= colInc;
             while (count > 0 && 0 <= r && r < board.length && 0 <= c && c < board[r].length){
-                currentBoard.getColor()[r][c] = color;
+                board[r][c] = color;
                 r -= rowInc;
                 c -= colInc;
                 count--;

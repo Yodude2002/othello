@@ -4,7 +4,7 @@ import players.RandomAI;
 
 public class Main {
 
-    private static final int gamesToPlay = 100;
+    private static final int gamesToPlay = 1;
 
     public static void main(String[] args) {
         Othello game = new Othello(new RandomAI(), new RandomAI());
