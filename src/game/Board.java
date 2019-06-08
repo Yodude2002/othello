@@ -234,7 +234,7 @@ public class Board {
         byte[] ratio = new byte[2];
         for (int r = 0; r < currentBoard.getColor().length; r++)
             for (int c = 0; c < currentBoard.getColor()[r].length; c++)
-                if (currentBoard.getHasTile()[r][c] = true) {
+                if (currentBoard.getHasTile()[r][c]) {
                     if (!currentBoard.getColor()[r][c])
                         ratio[0]++;
                     else
