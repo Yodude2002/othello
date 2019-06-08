@@ -18,10 +18,10 @@ public class Board {
      * Constructs a new Board with a clone of the given BoardState.
      *
      * This method creates deep clones.
-     * @param state
+     * @param state State of board to clone
      */
     public Board(BoardState state) {
-        currentBoard = new BoardState(state.getHasTile().clone(), state.getColor().clone());
+        currentBoard = new BoardState(BoardState.deepClone(state.getHasTile()), BoardState.deepClone(state.getColor().clone()));
     }
 
     /**
@@ -101,20 +101,25 @@ public class Board {
     }
 
     /**
-     * Returns ratio of black disks to white disks
-     * @return byte[] where [0] is # of black disks, [1] is # of white disks
+     * If isWhite, return white-black (how ahead player white is).
+     * If !isWhite, returns black-white (how ahead player black is).
+     * @return int of how many more disks there are of color isWhite than the other color on the board.
      */
-    public byte[] blackToWhiteRatio() {
-        byte[] ratio = new byte[2];
+    public int colorDifference(boolean isWhite) {
+        int black = 0;
+        int white = 0;
+        boolean[][] hasTile = currentBoard.getHasTile(), color = currentBoard.getColor();
         for (int r = 0; r < currentBoard.getColor().length; r++)
             for (int c = 0; c < currentBoard.getColor()[r].length; c++)
-                if (currentBoard.getHasTile()[r][c]) {
-                    if (!currentBoard.getColor()[r][c])
-                        ratio[0]++;
+                if (hasTile[r][c]) {
+                    if (!color[r][c])
+                        black++;
                     else
-                        ratio[1]++;
+                        white++;
                 }
-        return ratio;
+        if (isWhite)
+            return white-black;
+        return black-white;
     }
 
     /**

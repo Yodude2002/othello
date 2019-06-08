@@ -59,11 +59,10 @@ public class Othello {
             }
         }
         //logBoard();
-        byte[] ratio = board.blackToWhiteRatio();
-        if (ratio[0] == ratio[1])
+        int ratio = board.colorDifference(player1.getColor());
+        if (ratio == 0)
             return -2;
-        boolean winner = ratio[1] > ratio[0];
-        if (winner == player1.getColor())
+        if (ratio > 0)
             return 0;
         return 1;
     }
@@ -82,5 +81,6 @@ public class Othello {
             }
             System.out.println();
         }
+        System.out.println();
     }
 }

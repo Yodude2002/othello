@@ -10,8 +10,8 @@ public class BoardState {
      * @param color a 2d array representing the color of the disks of the tiles.
      */
     public BoardState(boolean[][] hasDisk, boolean[][] color) {
-        this.hasDisk = hasDisk.clone();
-        this.color = color.clone();
+        this.hasDisk = hasDisk;
+        this.color = color;
     }
 
     /**
@@ -56,6 +56,13 @@ public class BoardState {
         color[r1][c2] = false;
         color[r2][c1] = false;
         color[r2][c2] = true;
+    }
+
+    public static boolean[][] deepClone(boolean[][] a) {
+        boolean[][] ret = a.clone();
+        for (int r = 0; r < a.length; r++)
+                ret[r] = a[r].clone();
+        return ret;
     }
 
 }

@@ -4,7 +4,7 @@ import game.BoardState;
 import game.Player;
 import java.util.List;
 
-public class RandomAI implements Player { //Tested and wins 50% of time as you would expect
+public class RandomAI implements Player { //TODO Was winning 50% of the time until it suddenly wasn't. What has changed?
 
     /**
      * Color of player. True is white, false is black.
