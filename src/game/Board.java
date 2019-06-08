@@ -48,174 +48,48 @@ public class Board {
     /**
      * PRECONDITION - Move (r,c) must be valid
      * Goes out in each direction from (r,c).
-     * I will fix mistake soon.
-     * Flips a disk if it is not equal to color.
-     * Stops when it gets to a tile that is color or when it reaches a tile that has no disk.
-     * @param r Row of tile
-     * @param c Col of tile
+     * flips disks according to Othello Rules:
+     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
+     * @param row Row of tile
+     * @param col Column of tile
      * @param color The color tile (r,c) now is.
      */
-    private void updateBoard(int r, int c, boolean color) {
-        flipUp(r,c,color);
-        flipUpRight(r,c,color);
-        flipRight(r,c,color);
-        flipDownRight(r,c,color);
-        flipDown(r,c,color);
-        flipDownLeft(r,c,color);
-        flipLeft(r,c,color);
-        flipUpLeft(r,c,color);
-    }
-
-    /**
-     * Travels vertically from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipUp(int r, int c, boolean color) {
-        int row = r-1;
-        while (row >= 0 && currentBoard.getColor()[row][c] != color) {
-            if (!currentBoard.getHasTile()[row][c])
-                return;
-            row--;
+    private void updateBoard(int row, int col, boolean color) {
+        boolean[][] board = currentBoard.getColor();
+        boolean[][] hasTile = currentBoard.getHasTile();
+        for (int direction = 0; direction < board.length; direction++) {
+            int rowInc = 0;
+            int colInc = 0;
+            int count = 0;
+            if (direction == 7 || direction == 0 || direction == 1) {
+                rowInc = 1;
+            } else if (direction == 3 || direction == 4 || direction == 5) {
+                rowInc = -1;
+            }
+            if (direction == 1 || direction == 2 || direction == 3) {
+                colInc = 1;
+            } else if (direction == 5 || direction == 6 || direction == 7) {
+                colInc = -1;
+            }
+            int r = row += rowInc;
+            int c = col += colInc;
+            while (0 <= r && r < board.length && 0 <= c && c < board[r].length &&
+               board[r][c] != color) {
+                if (!hasTile[row][c])
+                    return;
+                r += rowInc;
+                c += colInc;
+                count++;
+            }
+            r -= rowInc;
+            c -= colInc;
+            while (count > 0 && 0 <= r && r < board.length && 0 <= c && c < board[r].length){
+                currentBoard.getColor()[r][c] = color;
+                r -= rowInc;
+                c -= colInc;
+                count--;
+            }
         }
-        while (++row < r && row < currentBoard.getColor().length)
-            currentBoard.getColor()[row][c] = color;
-    }
-
-    /**
-     * Travels up and to the right from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipUpRight(int r, int c, boolean color) {
-        int row = r-1;
-        int col = c+1;
-        while (row >= 0 && col < currentBoard.getColor()[row].length && currentBoard.getColor()[row][col] != color) {
-            if (!currentBoard.getHasTile()[row][col])
-                return;
-            row--;
-            col++;
-        }
-        while (++row < r && --col > c && row < currentBoard.getColor().length && col >= 0)
-            currentBoard.getColor()[row][col] = color;
-    }
-
-    /**
-     * Travels right from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipRight(int r, int c, boolean color) {
-        int col = c+1;
-        while (col < currentBoard.getColor()[r].length && currentBoard.getColor()[r][col] != color) {
-            if (!currentBoard.getHasTile()[r][col])
-                return;
-            col++;
-        }
-        while (--col > c && col >= 0)
-            currentBoard.getColor()[r][col] = color;
-    }
-
-    /**
-     * Travels down and to the right from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipDownRight(int r, int c, boolean color) {
-        int row = r+1;
-        int col = c+1;
-        while (row < currentBoard.getColor().length && col < currentBoard.getColor()[row].length && currentBoard.getColor()[row][col] != color) {
-            if (!currentBoard.getHasTile()[row][col])
-                return;
-            row++;
-            col++;
-        }
-        while (--row > r && --col > c && row < currentBoard.getColor().length && col < currentBoard.getColor()[row].length)
-            currentBoard.getColor()[row][col] = color;
-    }
-
-    /**
-     * Travels down from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipDown(int r, int c, boolean color) {
-        int row =  r+1;
-        while (row < currentBoard.getColor().length && currentBoard.getColor()[row][c] != color) {
-            if (!currentBoard.getHasTile()[row][c])
-                return;
-            row++;
-        }
-        while (--row > r && row < currentBoard.getColor().length)
-            currentBoard.getColor()[row][c] = color;
-    }
-
-    /**
-     * Travels down and to the left from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipDownLeft(int r, int c, boolean color) {
-        int row = r+1;
-        int col = c-1;
-        while (row < currentBoard.getColor().length && col >= 0 && currentBoard.getColor()[row][col] != color) {
-            if (!currentBoard.getHasTile()[row][col])
-                return;
-            row++;
-            col--;
-        }
-        while (--row > r && ++col < c && row >= 0 && col < currentBoard.getColor()[row].length)
-            currentBoard.getColor()[row][col] = color;
-    }
-
-    /**
-     * Travels left from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipLeft(int r, int c, boolean color) {
-        int col = c-1;
-        while (col >= 0 && currentBoard.getColor()[r][col] != color) {
-            if (!currentBoard.getHasTile()[r][col])
-                return;
-            col--;
-        }
-        while (++col < c && col < currentBoard.getColor()[r].length)
-            currentBoard.getColor()[r][col] = color;
-    }
-
-    /**
-     * Travels up and to the left from (r,c) and flips tiles according to Othello Rules:
-     * If a group of disks in opposite color are sandwich from (r,c) to another disk of (r,c)'s color, than flip.
-     * @param r Row of tile that just had a disk placed
-     * @param c Column of tile that just had a disk placed
-     * @param color Color of disk just placed
-     */
-    private void flipUpLeft(int r, int c, boolean color) {
-        int row = r-1;
-        int col = c-1;
-        while (row >= 0 && col >= 0 && currentBoard.getColor()[row][col] != color) {
-            if (!currentBoard.getHasTile()[row][col])
-                return;
-            row--;
-            col--;
-        }
-        while (++row < r && ++col < c && row < currentBoard.getColor().length && col < currentBoard.getColor()[row].length)
-            currentBoard.getColor()[row][col] = color;
     }
 
     /**

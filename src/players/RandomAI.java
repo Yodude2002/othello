@@ -4,7 +4,7 @@ import game.BoardState;
 import game.Player;
 import java.util.List;
 
-public class RandomAI implements Player {
+public class RandomAI implements Player { //Tested and wins 50% of time as you would expect
 
     private boolean isWhite;
 
