@@ -1,3 +1,4 @@
+
 import game.Othello;
 import players.RandomAI;
 
