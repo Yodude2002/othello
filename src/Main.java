@@ -1,12 +1,12 @@
 
 import game.Othello;
-import players.DrewAI;
+//import players.DrewAI;
 import players.RandomAI;
 import java.text.DecimalFormat;
 
 public class Main {
 
-    private static final int gamesToPlay = 1000;
+    private static final int gamesToPlay = 10000;
 
     public static void main(String[] args) {
         Othello game = new Othello(new RandomAI(), new RandomAI());
