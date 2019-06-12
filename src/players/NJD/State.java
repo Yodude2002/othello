@@ -24,7 +24,7 @@ public class State {
         boardState = state;
         board = new Board(state);
         this.color = color;
-        value = evaluateBoard(boardState, color);
+        value = evaluateBoard(board.getCurrentBoard(), color);
         this.move = -1;
         this.depth = 0;
         this.parent = null;
@@ -36,7 +36,7 @@ public class State {
         boardState = state;
         board = new Board(state);
         board.makeMove(move, (depth % 2 == 1) == color);
-        value = evaluateBoard(boardState, color);
+        value = evaluateBoard(board.getCurrentBoard(), color);
         this.color = color;
         this.move = move;
         this.depth = depth;
@@ -50,21 +50,23 @@ public class State {
      * @param depthTarget the amount of branches basically
      */
     private void branch(int depthTarget){
-        if(depth == depthTarget) return;
-        List<Integer> possibleMoves = Player.findPossibleMoves(boardState, (depth % 2 == 1) == color);
-        for(Integer move: possibleMoves){
-            children.add(new State(boardState, color, move, depth+1,depthTarget,this));
+        if(depth < depthTarget) {
+            List<Integer> possibleMoves = Player.findPossibleMoves(boardState, (depth % 2 == 0) == color);
+            for (Integer move : possibleMoves) {
+                children.add(new State(board.getCurrentBoard(), color, move, depth + 1, depthTarget, this));
+            }
         }
     }
 
     /**
+     * Should be called on top node of tree
      * Best moves at depth 1
      * @return
      */
     public int[] bestMoves(){ //TODO make this a larger array
         if(children.size()==0) return new int[]{-1};
         State bestChild = children.get(0);
-        int bestVal = -99999;
+        int bestVal = bestChild.getExpectedValue(); //todo bestchild is always the one at zero
         for(State child : children){
             int temp = child.getExpectedValue();
             if(temp>bestVal){
@@ -85,10 +87,10 @@ public class State {
         }else{
             ArrayList<Integer> values = new ArrayList<>();
             for(State child: children) values.add(child.getExpectedValue());
-            Collections.sort(values); //TODO maybe doesnt work
-            if(depth % 2 == 1){ //opponents choice, do an avg
+            Collections.sort(values);
+            if(depth % 2 == 1){
                 return (values.get(values.size()-1) + values.get(0))/2;
-            }else{ //my choice, take highest value
+            }else{
                 return values.get(values.size()-1);
             }
         }

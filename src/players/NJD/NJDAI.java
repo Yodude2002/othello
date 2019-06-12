@@ -45,6 +45,15 @@ public class NJDAI implements Player {
         return moveTree.bestMoves();
     }
 
+    private int[] findOKMoves(BoardState boardState, boolean color){
+        List<Integer> possibleMoves = Player.findPossibleMoves(boardState, color);
+        if (possibleMoves.size() == 0) return new int[]{-1};
+        if (possibleMoves.size() == 1) return new int[]{possibleMoves.get(0)};
+        State moveTree = new State(boardState,color,1); //TODO MAGIC # LIVES HERE //TODO this breaks my AI and throws some sort of exception
+        int[] bestMoves = moveTree.bestMoves();
+        return bestMoves;
+    }
+
 
 
 }
