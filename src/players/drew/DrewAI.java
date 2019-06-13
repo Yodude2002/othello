@@ -64,6 +64,12 @@ public class DrewAI implements Player {
        //return findBestMove(boardState);
     }
 
+    /**
+     * Given a BoardState, find the best move accoridng to DrewAI's algorithm.
+     * Set the depth of search and the top-k it takes at each depth above.
+     * @param state State of board to find a move on.
+     * @return A valid move.
+     */
     private int findDepthBestMove(BoardState state) {
         List<int[]> movesAtDepth = getMovesAtDepth(state, DEPTH, myColor, -1, new ArrayList<>());
         if (movesAtDepth.size() == 0)
@@ -79,6 +85,17 @@ public class DrewAI implements Player {
         return movesAtDepth.get((int) (Math.random() * movesAtDepth.size()))[0];
     }
 
+    /**
+     * Finds all the possible moves at the depth of DEPTH, but only going k paths each level on
+     * the AI's turn and going down the best path for the opponent on any other turn.
+     * If I was to update this AI, I would also make the opponent do the top k paths.
+     * @param state The state of the board trying to find valid moves at depth DEPTH.
+     * @param depth When calling this method from a non-recursive context, set this to DEPTH.
+     * @param turnColor When calling this method from a non-recursive context, set this to myColor.
+     * @param moveMadeToGetHere When calling this method from a non-recursive context, set this to -1.
+     * @param moves When calling this method from a non-recursive context, create a new ArrayList.
+     * @return All the possible, valid, and considered goodish moves at depth DEPTH.
+     */
     private List<int[]> getMovesAtDepth(BoardState state, int depth, boolean turnColor, int moveMadeToGetHere, List<int[]> moves) {
         List<Integer> posMoves = Player.findPossibleMoves(state, turnColor);
         if (posMoves.size() == 0)
@@ -144,6 +161,12 @@ public class DrewAI implements Player {
         return moves;
     }
 
+    /**
+     * Returns an opponent's likely move based on the DrewAI algorithm.
+     * @param state State of board to make a move on. (Won't actually change this field.)
+     * @param posMoves A List of all the valid moves for this opponent at this point.
+     * @return A valid move for the color of the opponent.
+     */
     private int doOpponentsTurn(BoardState state, List<Integer> posMoves) {
         int bestScore = Integer.MIN_VALUE;
         if (posMoves.size() == 0)
@@ -162,6 +185,18 @@ public class DrewAI implements Player {
         return moveOptions.get((int)(Math.random() * moveOptions.size()));
     }
 
+    /**
+     * Calculates a particular move's strength based on the DrewAI's heuristics:
+     *      A good move is the one gets the most squares.
+     *
+     * @param boardState State of board that a move is being considered on.
+     * @param move Move being considered.
+     * @param turn Color of whose turn it is. True if white, false if black.
+     * @param colorPointOfView Result will be in the perspective of this color. If this is true (aka white), a high positive value for
+     *                         getMoveValue would mean a move is good for white. If this was a false, a high value would
+     *                         be good for black.
+     * @return The value of a move based on the DrewAI's heuristics.
+     */
     private int getMoveValue(BoardState boardState, int move, boolean turn, boolean colorPointOfView) {
         //int r = move/8;
         //int c = move%8;
@@ -173,6 +208,11 @@ public class DrewAI implements Player {
         return ret;
     }
 
+    /**
+     * Finds the bestMove according to the heuristics in getMoveValue
+     * @param boardState State of board that a move is being considered for
+     * @return A valid move for myColor.
+     */
     private int findBestMove(BoardState boardState) {
         List<Integer> posMoves = Player.findPossibleMoves(boardState, myColor);
         if (posMoves.size() == 0)
@@ -189,6 +229,12 @@ public class DrewAI implements Player {
         return posMoves.get(bestMove);
     }
 
+    /**
+     * Calculates how far away int a is from the middle of length
+     * @param a Location on a number line
+     * @param length Length of line
+     * @return How far a is from length/2.
+     */
     private int farFromMiddleValue(int a, double length) {
         return (int) Math.abs(length/2 - a);
     }
