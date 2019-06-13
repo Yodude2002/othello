@@ -1,15 +1,20 @@
 package players.NJD;
 
-import game.Board;
 import game.BoardState;
 import game.Player;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Nathaniel J Dorson's AI for Othello
+ */
 public class NJDAI implements Player {
 
+    /**
+     * If this AI is playing for white
+     * true: white
+     * false: black
+     */
     public boolean isWhite;
 
     @Override
@@ -29,27 +34,33 @@ public class NJDAI implements Player {
 
     @Override
     public int getMove(BoardState boardState) {
-        int[] bestMoves = findBestMoves(boardState, isWhite);
+        int[] bestMoves = findBestMoves(boardState);
         return bestMoves[(int) (bestMoves.length * Math.random())];
     }
 
     /**
-     * @param boardState
-     * @return
+     * @param boardState the current state of the board
+     * @return an integer array of what are (hopefully) the best moves for the given position
      */
-    private int[] findBestMoves(BoardState boardState, boolean color) {
-        List<Integer> possibleMoves = Player.findPossibleMoves(boardState, color);
+    private int[] findBestMoves(BoardState boardState) {
+        List<Integer> possibleMoves = Player.findPossibleMoves(boardState, isWhite);
         if (possibleMoves.size() == 0) return new int[]{-1};
         if (possibleMoves.size() == 1) return new int[]{possibleMoves.get(0)};
-        State moveTree = new State(boardState,color,2); //TODO MAGIC # LIVES HERE //TODO this breaks my AI and throws some sort of exception
-        return moveTree.bestMoves();
+        Node moveTree = new Node(boardState,isWhite,4);
+        int[] bestMoves = moveTree.bestMoves();
+        return bestMoves;
     }
 
-    private int[] findOKMoves(BoardState boardState, boolean color){
-        List<Integer> possibleMoves = Player.findPossibleMoves(boardState, color);
+    /**
+     * a one step look-ahead version of my AI. Seems to function the most reliably
+     * @param boardState the current state of the board
+     * @return an integer array of what are (hopefully) the best moves for the given position
+     */
+    private int[] findOKMoves(BoardState boardState){
+        List<Integer> possibleMoves = Player.findPossibleMoves(boardState, isWhite);
         if (possibleMoves.size() == 0) return new int[]{-1};
         if (possibleMoves.size() == 1) return new int[]{possibleMoves.get(0)};
-        State moveTree = new State(boardState,color,1); //TODO MAGIC # LIVES HERE //TODO this breaks my AI and throws some sort of exception
+        Node moveTree = new Node(boardState,isWhite,1);
         int[] bestMoves = moveTree.bestMoves();
         return bestMoves;
     }
