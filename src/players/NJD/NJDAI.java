@@ -15,7 +15,7 @@ public class NJDAI implements Player {
      * true: white
      * false: black
      */
-    public boolean isWhite;
+    private boolean isWhite;
 
     @Override
     public String toString() {
