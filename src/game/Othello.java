@@ -33,6 +33,8 @@ public class Othello {
             board.reset();
 
         boolean running = true;
+        //board.makeMove(19,player1.getColor());
+        //board.makeMove(20,player2.getColor());
 
         while (running) {
             int p1Turn, p2Turn;
