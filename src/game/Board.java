@@ -73,21 +73,26 @@ public class Board {
             }
             int r = row + rowInc;
             int c = col + colInc;
+            boolean flip = true;
             while (0 <= r && r < board.length && 0 <= c && c < board[r].length &&
-               board[r][c] != color) {
-                if (!hasTile[row][c])
-                    return;
+                    board[r][c] != color) {
+                if (!hasTile[r][c]) {
+                    flip = false;
+                    break;
+                }
                 r += rowInc;
                 c += colInc;
                 count++;
             }
-            r -= rowInc;
-            c -= colInc;
-            while (count > 0 && 0 <= r && r < board.length && 0 <= c && c < board[r].length){
-                board[r][c] = color;
+            if (0 <= r && r < board.length && 0 <= c && c < board[r].length && hasTile[r][c]) {
                 r -= rowInc;
                 c -= colInc;
-                count--;
+                while (flip && count > 0 && 0 <= r && r < board.length && 0 <= c && c < board[r].length) {
+                    board[r][c] = color;
+                    r -= rowInc;
+                    c -= colInc;
+                    count--;
+                }
             }
         }
     }
