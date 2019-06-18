@@ -2,13 +2,13 @@
 import game.Othello;
 import game.Player;
 import players.*;
-import players.drew.DrewAI;
+//import players.drew.DrewAI;
 
 public class Main {
 
     private static final int gamesToPlay = 10_000;
 
-    private static final Player p1 = new DrewAI();
+    private static final Player p1 = new RandomAI();
     private static final Player p2 = new RandomAI();
 
     public static void main(String[] args) {
